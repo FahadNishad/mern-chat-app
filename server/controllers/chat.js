@@ -1,4 +1,9 @@
-import { ALERT, NEW_MESSAGE, NEW_MESSAGE_ALERT, REFETCH_CHATS } from "../constants/events.js";
+import {
+  ALERT,
+  NEW_MESSAGE,
+  NEW_MESSAGE_ALERT,
+  REFETCH_CHATS,
+} from "../constants/events.js";
 import { getOtherMember } from "../lib/helper.js";
 import { TryCatch } from "../middlewares/error.js";
 import { Chat } from "../models/chat.js";
@@ -214,6 +219,8 @@ const sendAttachments = TryCatch(async (req, res, next) => {
 
   const files = req.files || [];
 
+  console.log(files);
+
   if (files.length < 1)
     return next(new ErrorHandler("Please Upload Attachments", 400));
 
@@ -262,7 +269,6 @@ const sendAttachments = TryCatch(async (req, res, next) => {
     message,
   });
 });
-
 
 const getChatDetails = TryCatch(async (req, res, next) => {
   if (req.query.populate === "true") {
@@ -368,7 +374,6 @@ const deleteChat = TryCatch(async (req, res, next) => {
   });
 });
 
-
 const getMessages = TryCatch(async (req, res, next) => {
   const chatId = req.params.id;
   const { page = 1 } = req.query;
@@ -414,5 +419,5 @@ export {
   getChatDetails,
   renameGroup,
   deleteChat,
-  getMessages
+  getMessages,
 };
