@@ -18,7 +18,7 @@ const adminLogin = TryCatch(async (req, res, next) => {
 
   return res
     .status(200)
-    .cookie("chattu-admin-token", token, {
+    .cookie("admin-access-token", token, {
       ...cookieOptions,
       maxAge: 1000 * 60 * 15,
     })
@@ -29,9 +29,11 @@ const adminLogin = TryCatch(async (req, res, next) => {
 });
 
 const adminLogout = TryCatch(async (req, res, next) => {
+  console.log("adada");
+  
   return res
     .status(200)
-    .cookie("chattu-admin-token", "", {
+    .cookie("admin-access-token", "", {
       ...cookieOptions,
       maxAge: 0,
     })
